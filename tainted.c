@@ -1,10 +1,11 @@
 /* $Id: tainted.c,v 1.2 2022/02/16 20:20:14 ralph Exp $
  * vim:set fileencoding=utf8 fileformat=unix filetype=c tabstop=2 noexpandtab:
+ *
  * Tainted: Tool to get the current taint value and print each set bit in
  * 	        human readable format
  *
  * (C) 2014 - Nikolay Aleksandrov <nikolay@redhat.com> - https://github.com/NikAleksandrov/tainted
- * (c) 2022 - Ralph Roth - emhancements and fixes for SLES 12, 15, openSUSE
+ * (c) 2022 - Ralph Roth - enhancements and fixes for SLES 12, 15, openSUSE - https://github.com/roseswe/tainted
  *
  * Compile with:
  * 	gcc -O2 -o tainted tainted.c
@@ -20,7 +21,7 @@
 #include <string.h>
 
 #define PROC_TAINTED "/proc/sys/kernel/tainted"
-#define HELP_FMT "%s [-hix value] Version 2.0 (%s)\nWithout command-line options this tool will print the\n" \
+#define HELP_FMT "%s [-hix value] Version 2.0.0 (%s)\nWithout command-line options this tool will print the\n" \
 								 "current taint value (from proc FS) with information about each set bit.\n"                 \
 								 "-h - this help\n"                                                                          \
 								 "-i - print information about the different taint bits\n"                                   \
