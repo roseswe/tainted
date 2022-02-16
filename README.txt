@@ -2,7 +2,7 @@
 tainted - CLI tool to get the current Linux Kernel taint value and print each set bit in human readable format
 
 (C) 2014 - Nikolay Aleksandrov <nikolay@redhat.com> (Version 1.0)
-(c) 2022 - Ralph Roth - emhancements and fixes for SLES 12, 15, openSUSE (Version 2.0)
+(c) 2022 - Ralph Roth - enhancements and fixes for SLES 12, 15, openSUSE (Version 2.0)
 
 Homepage of version 2.x = https://github.com/roseswe/tainted
 
