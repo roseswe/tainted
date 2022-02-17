@@ -1,4 +1,4 @@
-/* $Id: tainted.c,v 1.2 2022/02/16 20:20:14 ralph Exp $
+/* $Id: tainted.c,v 1.3 2022/02/17 07:55:14 ralph Exp $
  * vim:set fileencoding=utf8 fileformat=unix filetype=c tabstop=2 noexpandtab:
  *
  * Tainted: Tool to get the current taint value and print each set bit in
@@ -21,10 +21,10 @@
 #include <string.h>
 
 #define PROC_TAINTED "/proc/sys/kernel/tainted"
-#define HELP_FMT "%s [-hix value] Version 2.0.0 (%s)\nWithout command-line options this tool will print the\n" \
+#define HELP_FMT "%s [-?hix value] Version 2.0.2 (%s)\nWithout command-line options this tool will print the\n" \
 								 "current taint value (from proc FS) with information about each set bit.\n"                 \
-								 "-h - this help\n"                                                                          \
-								 "-i - print information about the different taint bits\n"                                   \
+								 "-h -?    - this help\n"                                                                          \
+								 "-i       - print information about the different taint bits\n"                                   \
 								 "-x value - print taint information using value instead"
 #define BIT(x) (1UL << x)
 
@@ -112,7 +112,7 @@ int main(int argc, char **argv)
 	unsigned long ulFlags = 0;
 	int opt, i;
 
-	while ((opt = getopt(argc, argv, "hix:")) != -1)
+	while ((opt = getopt(argc, argv, "?hix:")) != -1)
 	{
 		switch (opt)
 		{
@@ -120,6 +120,7 @@ int main(int argc, char **argv)
 			ulFlags = ~0; /* not zero -> -1 */
 			break;
 		case 'h':
+		case '?':
 			printf(HELP_FMT, argv[0], __DATE__);
 			return 0;
 		case 'x':

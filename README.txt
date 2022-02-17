@@ -20,13 +20,14 @@ cc  tainted.o -o tainted
 
 -----------------------------------------------------------------------------
 
-$ ./tainted -h
-./tainted [-hix value] Version 2.0 (Feb 16 2022)
+$ ./tainted -?
+./tainted [-?hix value] Version 2.0.0 (Feb 17 2022)
 Without command-line options this tool will print the
 current taint value (from proc FS) with information about each set bit.
--h - this help
--i - print information about the different taint bits
+-h -?    - this help
+-i       - print information about the different taint bits
 -x value - print taint information using value instead
+
 
 $ ./tainted -x 2147488256
 Taint value: 4608 0x1200 (0000000001001000000000)
@@ -81,5 +82,5 @@ Taint value: 2147483647 0x7fffffff (1111111111111111111111)
  *  18  262144    Reserved for the future :-)
  *  19  524288    Reserved for the future :-)
 
-// $Id: README.txt,v 1.2 2022/02/16 20:20:14 ralph Exp $
+// $Id: README.txt,v 1.3 2022/02/17 07:55:14 ralph Exp $
 // vim:set fileencoding=utf8 fileformat=unix filetype=text tabstop=2 expandtab:
