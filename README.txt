@@ -20,35 +20,38 @@ cc  tainted.o -o tainted
 
 -----------------------------------------------------------------------------
 
-$ ./tainted -?
-./tainted [-?hix value] Version 2.0.0 (Feb 17 2022)
+$ ./tainted -h
+./tainted [-?hix value] Version 2.0.5 (Feb 21 2022)
 Without command-line options this tool will print the
 current taint value (from proc FS) with information about each set bit.
 -h -?    - this help
 -i       - print information about the different taint bits
 -x value - print taint information using value instead
 
-
 $ ./tainted -x 2147488256
-Taint value: 4608 0x1200 (0000000001001000000000)
+Taint value (original): 2147488256 0x80001200  (cleared): 4608 0x00001200 (0000000001001000000000)
 [F/bit] [bit val] [description]
  W   9  512       A kernel warning has occurred
  O  12  4096      An out-of-tree module has been loaded
 
-$ ./tainted -x2147495936
-Taint value: 12288 0x3000 (0000000011000000000000)
+$ ./tainted -x 2147495936
+Taint value (original): 2147495936 0x80003000  (cleared): 12288 0x00003000 (0000000011000000000000)
 [F/bit] [bit val] [description]
-O  12  4096      An out-of-tree module has been loaded
-E  13  8192      An unsigned module has been loaded in a kernel supporting
-                 module signature
+ O  12  4096      An out-of-tree module has been loaded
+ E  13  8192      An unsigned module has been loaded in a kernel supporting
+                  module signature
+
+$ cat /proc/sys/kernel/tainted
+2147561472
 
 $ ./tainted
-Taint value: 77824 0x13000 (0000010011000000000000)
+Taint value (original): 2147561472 0x80013000  (cleared): 77824 0x00013000 (0000010011000000000000)
 [F/bit] [bit val] [description]
-O  12  4096      An out-of-tree module has been loaded
-E  13  8192      An unsigned module has been loaded in a kernel supporting
-                 module signature
-X  16  65536     Auxiliary taint, defined for and used by distros
+ O  12  4096      An out-of-tree module has been loaded
+ E  13  8192      An unsigned module has been loaded in a kernel supporting
+                  module signature
+ X  16  65536     Auxiliary taint, defined for and used by distros
+
 
 -----------------------------------------------------------------------------
 
@@ -82,5 +85,5 @@ Taint value: 2147483647 0x7fffffff (1111111111111111111111)
  *  18  262144    Reserved for the future :-)
  *  19  524288    Reserved for the future :-)
 
-// $Id: README.txt,v 1.3 2022/02/17 07:55:14 ralph Exp $
+// $Id: README.txt,v 1.4 2022/02/17 09:15:07 ralph Exp $
 // vim:set fileencoding=utf8 fileformat=unix filetype=text tabstop=2 expandtab:

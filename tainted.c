@@ -1,4 +1,4 @@
-/* $Id: tainted.c,v 1.3 2022/02/17 07:55:14 ralph Exp $
+/* $Id: tainted.c,v 1.5 2022/02/21 13:06:17 ralph Exp $
  * vim:set fileencoding=utf8 fileformat=unix filetype=c tabstop=2 noexpandtab:
  *
  * Tainted: Tool to get the current taint value and print each set bit in
@@ -21,10 +21,12 @@
 #include <string.h>
 
 #define PROC_TAINTED "/proc/sys/kernel/tainted"
-#define HELP_FMT "%s [-?hix value] Version 2.0.2 (%s)\nWithout command-line options this tool will print the\n" \
-								 "current taint value (from proc FS) with information about each set bit.\n"                 \
-								 "-h -?    - this help\n"                                                                          \
-								 "-i       - print information about the different taint bits\n"                                   \
+
+// we try to align the version number with the CVS commit :-)  
+#define HELP_FMT "%s [-?hix value] Version 2.0.5 (%s)\nWithout command-line options this tool will print the\n" \
+								 "current taint value (from proc FS) with information about each set bit.\n"                    \
+								 "-h -?    - this help\n"                                                                       \
+								 "-i       - print information about the different taint bits\n"                                \
 								 "-x value - print taint information using value instead"
 #define BIT(x) (1UL << x)
 
@@ -143,9 +145,10 @@ int main(int argc, char **argv)
 			return -errno;
 	}
 
+	printf("Taint value (original): %lu 0x%08lx ", ulFlags, ulFlags);
 	ulFlags = ulFlags & 0x7fffffff; /* workaround/hack for SLES 12/15 */
 
-	printf("Taint value: %lu 0x%lx (", ulFlags, ulFlags);
+	printf(" (cleared): %lu 0x%08lx (", ulFlags, ulFlags);
 	for (i = strlen(szFlags) + 1; i >= 0; i--)
 	{
 		if (ulFlags & BIT(i))
