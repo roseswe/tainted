@@ -19,3 +19,7 @@ $(EXECUTABLE): $(OBJECTS)
 
 clean:
 	$(RM) $(EXECUTABLE) $(OBJECTS)
+
+changelog:
+	gitchangelog > ChangeLog.txt
+	

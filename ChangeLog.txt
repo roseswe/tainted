@@ -1,0 +1,30 @@
+Changelog
+=========
+
+
+2.0.5 (2022-02-21)
+------------------
+
+Changes
+~~~~~~~
+- V2.0.5 print now original and cleared taint flag. [roseswe]
+- Added github URL. [roseswe]
+
+Fix
+~~~
+- Spell check. [roseswe]
+
+Other
+~~~~~
+- Merge pull request #3 from roseswe:roseswe/issue2. [Ralph Roth]
+
+  Add CLI option "-?" to program and documentation
+- Add CLI option "-?" to program and documentation Fixes #2. [roseswe]
+- Create flawfinder-analysis.yml. [Ralph Roth]
+
+  This is experimental ....
+- Update makefile.yml. [Ralph Roth]
+- Create makefile.yml. [Ralph Roth]
+- Init: Put the files under git control. [roseswe]
+
+
