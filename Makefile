@@ -1,7 +1,7 @@
 # vim:set fileencoding=utf8 fileformat=unix filetype=makefile tabstop=2 noexpandtab:
-# $Id: Makefile,v 1.2 2022/02/16 20:20:14 ralph Exp $
+# $Id: Makefile,v 1.3 2022/02/22 11:28:20 ralph Exp $
 
-C=/usr/bin/gcc
+CC=/usr/bin/gcc
 CFLAGS=-c -Wall -O2 -s
 RM=/bin/rm
 LDFLAGS=
@@ -13,6 +13,7 @@ all: $(SOURCES) $(EXECUTABLE)
 
 $(EXECUTABLE): $(OBJECTS)
 	$(CC) $(LDFLAGS) $(OBJECTS) -o $@
+	strip $@
 
 .c.o:
 	$(CC) $(CFLAGS) $< -o $@
@@ -20,6 +21,13 @@ $(EXECUTABLE): $(OBJECTS)
 clean:
 	$(RM) $(EXECUTABLE) $(OBJECTS)
 
+## should run everywhere!
+static: $(EXECUTABLE)_static $(OBJECTS)
+
+$(EXECUTABLE)_static:
+	$(CC) --static $(LDFLAGS) $(OBJECTS) -o $@
+	strip $@
+
 changelog:
 	gitchangelog > ChangeLog.txt
-	
+	cat ChangeLog.txt
