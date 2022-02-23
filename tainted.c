@@ -1,4 +1,4 @@
-/* $Id: tainted.c,v 1.5 2022/02/21 13:06:17 ralph Exp $
+/* $Id: tainted.c,v 1.7 2022/02/23 07:45:36 ralph Exp $
  * vim:set fileencoding=utf8 fileformat=unix filetype=c tabstop=2 noexpandtab:
  *
  * Tainted: Tool to get the current taint value and print each set bit in
@@ -23,7 +23,7 @@
 #define PROC_TAINTED "/proc/sys/kernel/tainted"
 
 // we try to align the version number with the CVS commit :-)  
-#define HELP_FMT "%s [-?hix value] Version 2.0.5 (%s)\nWithout command-line options this tool will print the\n" \
+#define HELP_FMT "%s [-?hix value] Version 2.0.6 (%s)\nWithout command-line options this tool will print the\n" \
 								 "current taint value (from proc FS) with information about each set bit.\n"                    \
 								 "-h -?    - this help\n"                                                                       \
 								 "-i       - print information about the different taint bits\n"                                \
@@ -50,36 +50,42 @@ enum
 	TAINT_SOFTLOCKUP,
 	TAINT_LIVEPATCH, /* 15 new stuff follows */
 	TAINT_AUX,
-	TAINT_STRUCT_RANDOM,
+	TAINT_STRUCT_RANDOM, /* 17 */
 	TAINT_FUTURE1,
 	TAINT_FUTURE2,
+	/* 20 */
+
+	/* #  define TAINT_NO_SUPPORT             31    (SUSE) */
+	TAINT_NO_SUPPORT = 31,
 };
 
 /* Extracted from linux/Documentation/sysctl/kernel.txt */
 static const char *szKernelTaintDescription[] = {
-		[TAINT_PROPRIETARY_MODULE] = "A module with a non-GPL license has been loaded, this\n                  includes modules with no license.\n                  Set by modutils >= 2.4.9 and module-init-tools",
+		[TAINT_PROPRIETARY_MODULE] = "(G/P) A module with a non-GPL license has been loaded,\n                    this includes modules with no license.\n                    Set by modutils >= 2.4.9 and module-init-tools",
 		[TAINT_FORCED_MODULE] = "A module was force loaded by insmod -f",
 		[TAINT_CPU_OUT_OF_SPEC] = "Unsafe SMP processors: SMP with CPUs not designed for SMP",
 		[TAINT_FORCED_RMMOD] = "A module was forcibly unloaded from the system by rmmod -f",
 		[TAINT_MACHINE_CHECK] = "A hardware machine check error occurred on the system",
 		[TAINT_BAD_PAGE] = "A bad page was discovered on the system",
-		[TAINT_USER] = "The user has asked that the system be marked \"tainted\". This\n                  could be because they are running software that directly\n                  modifies the hardware, or for other reasons",
+		[TAINT_USER] = "(N/U) The user has asked that the system be marked \"tainted\". This\n                    could be because they are running software that directly\n                    modifies the hardware, or for other reasons",
 		[TAINT_DIE] = "The system has died",
-		[TAINT_OVERRIDEN_ACPI_TABLE] = "The ACPI DSDT has been overridden with one supplied by the\n                  user instead of using the one provided by the hardware",
+		[TAINT_OVERRIDEN_ACPI_TABLE] = "The ACPI DSDT has been overridden with one supplied by the\n                    user instead of using the one provided by the hardware",
 		[TAINT_WARN] = "A kernel warning has occurred",
 		[TAINT_CRAP] = "A module from drivers/staging was loaded",
 		[TAINT_FIRMWARE_WORKAROUND] = "The system is working around a severe firmware bug",
 		[TAINT_OOT_MODULE] = "An out-of-tree module has been loaded",
-		[TAINT_UNSIGNED_MODULE] = "An unsigned module has been loaded in a kernel supporting\n                  module signature",
+		[TAINT_UNSIGNED_MODULE] = "An unsigned module has been loaded in a kernel supporting\n                    module signature",
 		[TAINT_SOFTLOCKUP] = "A soft lockup has previously occurred on the system",
 		[TAINT_LIVEPATCH] = "The kernel has been live patched", /* 15 new stuff follows */
 		[TAINT_AUX] = "Auxiliary taint, defined for and used by distros",
 		[TAINT_STRUCT_RANDOM] = "Kernel was built with the struct randomization plugin",
-		[TAINT_FUTURE1] = "Reserved for the future :-)",
-		[TAINT_FUTURE2] = "Reserved for the future :-)",
+
+		NULL, NULL, NULL,  /* 20 */
+		NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, /* 30 */
+		[TAINT_NO_SUPPORT] = "SUSE: An unsupported kernel module was loaded",  /* 31 */
 		NULL};
 
-static const char *szFlags = "PFSRMBUDAWCIOELKXT**";
+static const char *szFlags = "PFSRMBUDAWCIOELKXT_____________N";
 
 static unsigned long read_flags(void)
 {
@@ -145,26 +151,26 @@ int main(int argc, char **argv)
 			return -errno;
 	}
 
-	printf("Taint value (original): %lu 0x%08lx ", ulFlags, ulFlags);
-	ulFlags = ulFlags & 0x7fffffff; /* workaround/hack for SLES 12/15 */
-
-	printf(" (cleared): %lu 0x%08lx (", ulFlags, ulFlags);
-	for (i = strlen(szFlags) + 1; i >= 0; i--)
+	printf("Taint value (original): %lu, Hex: 0x%08lx\nBinary: [", ulFlags, ulFlags);
+	// see 'N'-Flag: https://raw.githubusercontent.com/openSUSE/kernel/SLE15-SP4/Documentation/admin-guide/sysctl/kernel.rst
+	for (i = strlen(szFlags); i >= 0; i--)
 	{
 		if (ulFlags & BIT(i))
 			printf("1");
 		else
 			printf("0");
 	} /* for i */
-	printf(")\n");
-
-	printf("%-5s %-9s %-64s\n", "[F/bit]", "[bit val]", "[description]");
-	for (i = 0; szKernelTaintDescription[i] && i < sizeof(long int) * 8; i++)
+	printf("] Hex cleared: 0x%08lx\n", ulFlags & 0x1ffff);
+	
+	printf("%-5s %-11s %-64s\n", "[F/bit]", "[bit val]", "[description]");
+	// was: for (i = 0; szKernelTaintDescription[i] && i <  sizeof(long int) * 8; i++)
+	for (i = 0; i<32; i++)
 	{
 		if (ulFlags & BIT(i))
-			printf(" %c %3d  %-8lu  %-64s\n",
+			printf(" %c %3d  %-10lu  %-64s\n",
 						 szFlags[i], i, BIT(i), szKernelTaintDescription[i]);
 	} /* for i */
 
+	
 	return 0;
 }
