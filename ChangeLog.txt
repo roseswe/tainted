@@ -2,6 +2,23 @@ Changelog
 =========
 
 
+2.0.6 (2022-02-23)
+------------------
+
+New
+~~~
+- Added SUSE links. N-Flag added, 2.06. [roseswe]
+- Static target added, stripping added. [roseswe]
+
+Changes
+~~~~~~~
+- Added static target to ignore list. [roseswe]
+
+Other
+~~~~~
+- Add: ChangeLog handling. [roseswe]
+
+
 2.0.5 (2022-02-21)
 ------------------
 
