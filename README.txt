@@ -2,18 +2,13 @@
 tainted - CLI tool to get the current Linux Kernel taint value and print each set bit in human readable format
 
 (C) 2014 - Nikolay Aleksandrov <nikolay@redhat.com> (Version 1.0)
-(c) 2022 - Ralph Roth - enhancements and fixes for SLES 12, 15, openSUSE (Version 2.0)
+(c) 2022 - Ralph Roth (Version 2.x.x) - enhancements and fixes for SLES 12, 15, openSUSE
 
-Homepage of version 2.x = https://github.com/roseswe/tainted
+Homepage of version 2.x.x = https://github.com/roseswe/tainted
 
-Completely free, no license whatsoever.
+The current taint value is extracted from /proc/sys/kernel/tainted or can be passed on the command line with the option -x
 
-The current taint value is extracted from /proc/sys/kernel/tainted
-
-NOTE: SLES 12/SLES 15/openSUSE 15 sets the bit 31 (N) of the tainted value.
-The program has been adapted to scope with this special behaviour (version 2.0.6++).
-See also SUSE TID #000016321 (3582750) Tainted kernel - https://www.suse.com/support/kb/doc/?id=000016321
-and /usr/src/linux/Documentation/sysctl/kernel.txt
+NOTE: SLES 12/SLES 15/openSUSE 15 sets the bit 31 (N) of the tainted value. The program has been adapted to scope with this special behaviour (version 2.0.6++). See also SUSE TID #000016321 (3582750) Tainted kernel - https://www.suse.com/support/kb/doc/?id=000016321 and /usr/src/linux/Documentation/sysctl/kernel.txt
 
 -----------------------------------------------------------------------------
 
