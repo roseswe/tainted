@@ -2,6 +2,19 @@ Changelog
 =========
 
 
+(unreleased)
+------------
+
+Changes
+~~~~~~~
+- Ported ReadMe to MarkDown. [roseswe]
+
+Other
+~~~~~
+- Update README.txt. [Ralph Roth]
+- Update README.txt. [Ralph Roth]
+
+
 2.0.6 (2022-02-23)
 ------------------
 
@@ -12,6 +25,7 @@ New
 
 Changes
 ~~~~~~~
+- Documented chages for 2.0.6. [roseswe]
 - Added static target to ignore list. [roseswe]
 
 Other
