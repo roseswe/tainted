@@ -6,3 +6,4 @@ CVS/Repository
 .vscode/tasks.json
 .vscode/launch.json
 tainted_static
+.vscode/settings.json

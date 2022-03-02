@@ -1,5 +1,5 @@
 # vim:set fileencoding=utf8 fileformat=unix filetype=makefile tabstop=2 noexpandtab:
-# $Id: Makefile,v 1.3 2022/02/22 11:28:20 ralph Exp $
+# $Id: Makefile,v 1.4 2022/02/23 09:37:56 ralph Exp $
 
 CC=/usr/bin/gcc
 CFLAGS=-c -Wall -O2 -s

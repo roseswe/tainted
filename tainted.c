@@ -1,4 +1,4 @@
-/* $Id: tainted.c,v 1.7 2022/02/23 07:45:36 ralph Exp $
+/* $Id: tainted.c,v 1.8 2022/02/25 02:42:39 ralph Exp $
  * vim:set fileencoding=utf8 fileformat=unix filetype=c tabstop=2 noexpandtab:
  *
  * Tainted: Tool to get the current taint value and print each set bit in
@@ -26,7 +26,7 @@
 #define HELP_FMT "%s [-?hix value] Version 2.0.6 (%s)\nWithout command-line options this tool will print the\n" \
 								 "current taint value (from proc FS) with information about each set bit.\n"                    \
 								 "-h -?    - this help\n"                                                                       \
-								 "-i       - print information about the different taint bits\n"                                \
+								 "-i -l    - print information about the different taint bits (list)\n"                         \
 								 "-x value - print taint information using value instead"
 #define BIT(x) (1UL << x)
 
@@ -65,7 +65,7 @@ static const char *szKernelTaintDescription[] = {
 		[TAINT_FORCED_MODULE] = "A module was force loaded by insmod -f",
 		[TAINT_CPU_OUT_OF_SPEC] = "Unsafe SMP processors: SMP with CPUs not designed for SMP",
 		[TAINT_FORCED_RMMOD] = "A module was forcibly unloaded from the system by rmmod -f",
-		[TAINT_MACHINE_CHECK] = "A hardware machine check error occurred on the system",
+		[TAINT_MACHINE_CHECK] = "A hardware machine check error (MCE) occurred on the system",
 		[TAINT_BAD_PAGE] = "A bad page was discovered on the system",
 		[TAINT_USER] = "(N/U) The user has asked that the system be marked \"tainted\". This\n                    could be because they are running software that directly\n                    modifies the hardware, or for other reasons",
 		[TAINT_DIE] = "The system has died",
@@ -120,11 +120,12 @@ int main(int argc, char **argv)
 	unsigned long ulFlags = 0;
 	int opt, i;
 
-	while ((opt = getopt(argc, argv, "?hix:")) != -1)
+	while ((opt = getopt(argc, argv, "?hilx:")) != -1)
 	{
 		switch (opt)
 		{
 		case 'i':
+		case 'l':
 			ulFlags = ~0; /* not zero -> -1 */
 			break;
 		case 'h':
