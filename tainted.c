@@ -1,4 +1,4 @@
-/* $Id: tainted.c,v 1.8 2022/02/25 02:42:39 ralph Exp $
+/* $Id: tainted.c,v 1.9 2022/03/02 14:22:33 ralph Exp $
  * vim:set fileencoding=utf8 fileformat=unix filetype=c tabstop=2 noexpandtab:
  *
  * Tainted: Tool to get the current taint value and print each set bit in
@@ -67,7 +67,7 @@ static const char *szKernelTaintDescription[] = {
 		[TAINT_FORCED_RMMOD] = "A module was forcibly unloaded from the system by rmmod -f",
 		[TAINT_MACHINE_CHECK] = "A hardware machine check error (MCE) occurred on the system",
 		[TAINT_BAD_PAGE] = "A bad page was discovered on the system",
-		[TAINT_USER] = "(N/U) The user has asked that the system be marked \"tainted\". This\n                    could be because they are running software that directly\n                    modifies the hardware, or for other reasons",
+		[TAINT_USER] = "(N/U) The user has asked that the system be marked \"tainted\".\n                    This could be because they are running software that \n                    directly modifies the hardware, or for other reasons",
 		[TAINT_DIE] = "The system has died",
 		[TAINT_OVERRIDEN_ACPI_TABLE] = "The ACPI DSDT has been overridden with one supplied by the\n                    user instead of using the one provided by the hardware",
 		[TAINT_WARN] = "A kernel warning has occurred",

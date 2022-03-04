@@ -8,9 +8,11 @@ tainted is a command-line (CLI) tool to get the current Linux Kernel taint value
 
 Homepage of version 2.x.x = <https://github.com/roseswe/tainted>
 
-The current taint value is extracted from /proc/sys/kernel/tainted or can be passed on the command line with the option -x
+The Linux kernel maintains a "tainted state" that is included in kernel error messages. The tainted state provides information about whether something has happened to the running kernel that affects whether a kernel error or hang can be effectively fixed by analyzing the kernel source code. Some of the information in the taint relates to whether the information provided by the kernel in the error message can be trusted.
 
-NOTE: SLES 12/SLES 15/openSUSE 15 sets the bit 31 (N) of the tainted value. The program has been adapted to scope with this special behaviour (tainted version 2.0.6++). See also the SUSE Technical Information Document (TID) #000016321 (3582750) -- Tainted kernel - <https://www.suse.com/support/kb/doc/?id=000016321> and /usr/src/linux/Documentation/sysctl/kernel.txt
+The current taint value is extracted by `tainted` from /proc/sys/kernel/tainted or can be passed on the command line with the option -x
+
+NOTE: SLES 12/SLES 15/openSUSE 15 sets the bit 31 (N) of the tainted value. The program has been adapted to scope with this special behavior (tainted version 2.0.6++). See also the SUSE Technical Information Document (TID) #000016321 (3582750) -- Tainted kernel - <https://www.suse.com/support/kb/doc/?id=000016321> and /usr/src/linux/Documentation/sysctl/kernel.txt
 
 ## How to build
 
@@ -39,7 +41,7 @@ NOTE: SLES 12/SLES 15/openSUSE 15 sets the bit 31 (N) of the tainted value. The 
     [F/bit] [bit val] [description]
     O  12  4096      An out-of-tree module has been loaded
     E  13  8192      An unsigned module has been loaded in a kernel supporting
-                      module signature
+                     module signature
 
     $ cat /proc/sys/kernel/tainted
     2147561472
@@ -101,5 +103,5 @@ NOTE: SLES 12/SLES 15/openSUSE 15 sets the bit 31 (N) of the tainted value. The 
 
 -----------------------------------------------------------------------------
 
-// $Id: README.txt,v 1.6 2022/02/23 07:45:35 ralph Exp $
+// $Id: README.md,v 1.2 2022/03/04 08:54:27 ralph Exp $
 // vim:set fileencoding=utf8 fileformat=unix filetype=text tabstop=2 expandtab:
