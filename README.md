@@ -46,62 +46,64 @@ NOTE: SLES 12/SLES 15/openSUSE 15 sets the bit 31 (N) of the tainted value. The 
     $ cat /proc/sys/kernel/tainted
     2147561472
 
-    $ ./tainted 
+    $ ./tainted
     Taint value (original): 2147561472, Hex: 0x80013000
     Binary: [010000000000000010011000000000000] Hex cleared: 0x00013000
-    [F/bit] [bit val]   [description]                                                   
-    O  12  4096        An out-of-tree module has been loaded                           
+    [F/bit] [bit val]   [description]
+    O  12  4096        An out-of-tree module has been loaded
     E  13  8192        An unsigned module has been loaded in a kernel supporting
                         module signature
-    X  16  65536       Auxiliary taint, defined for and used by distros                
-    N  31  2147483648  SUSE: An unsupported kernel module was loaded 
+    X  16  65536       Auxiliary taint, defined for and used by distros
+    N  31  2147483648  SUSE: An unsupported kernel module was loaded
 
 -----------------------------------------------------------------------------
 
     $ ./tainted -l
     Taint value (original): 18446744073709551615, Hex: 0xffffffffffffffff
     Binary: [111111111111111111111111111111111] Hex cleared: 0x0001ffff
-    [F/bit] [bit val]   [description]                                                   
+    [F/bit] [bit val]   [description]
     P   0  1           (G/P) A module with a non-GPL license has been loaded,
                         this includes modules with no license.
                         Set by modutils >= 2.4.9 and module-init-tools
-    F   1  2           A module was force loaded by insmod -f                          
-    S   2  4           Unsafe SMP processors: SMP with CPUs not designed for SMP       
-    R   3  8           A module was forcibly unloaded from the system by rmmod -f      
-    M   4  16          A hardware machine check error (MCE) occurred on the system     
-    B   5  32          A bad page was discovered on the system                         
+    F   1  2           A module was force loaded by insmod -f
+    S   2  4           Unsafe SMP processors: SMP with CPUs not designed for SMP
+    R   3  8           A module was forcibly unloaded from the system by rmmod -f
+    M   4  16          A hardware machine check error (MCE) occurred on the system
+    B   5  32          A bad page was discovered on the system
     U   6  64          (N/U) The user has asked that the system be marked "tainted". This
                         could be because they are running software that directly
                         modifies the hardware, or for other reasons
-    D   7  128         The system has died                                             
+    D   7  128         The system has died
     A   8  256         The ACPI DSDT has been overridden with one supplied by the
                         user instead of using the one provided by the hardware
-    W   9  512         A kernel warning has occurred                                   
-    C  10  1024        A module from drivers/staging was loaded                        
-    I  11  2048        The system is working around a severe firmware bug              
-    O  12  4096        An out-of-tree module has been loaded                           
+    W   9  512         A kernel warning has occurred
+    C  10  1024        A module from drivers/staging was loaded
+    I  11  2048        The system is working around a severe firmware bug
+    O  12  4096        An out-of-tree module has been loaded
     E  13  8192        An unsigned module has been loaded in a kernel supporting
                         module signature
-    L  14  16384       A soft lockup has previously occurred on the system             
-    K  15  32768       The kernel has been live patched                                
-    X  16  65536       Auxiliary taint, defined for and used by distros                
-    T  17  131072      Kernel was built with the struct randomization plugin           
-    _  18  262144      (null)                                                          
-    _  19  524288      (null)                                                          
-    _  20  1048576     (null)                                                          
-    _  21  2097152     (null)                                                          
-    _  22  4194304     (null)                                                          
-    _  23  8388608     (null)                                                          
-    _  24  16777216    (null)                                                          
-    _  25  33554432    (null)                                                          
-    _  26  67108864    (null)                                                          
-    _  27  134217728   (null)                                                          
-    _  28  268435456   (null)                                                          
-    _  29  536870912   (null)                                                          
-    _  30  1073741824  (null)                                                          
-    N  31  2147483648  SUSE: An unsupported kernel module was loaded 
+    L  14  16384       A soft lockup has previously occurred on the system
+    K  15  32768       The kernel has been live patched
+    X  16  65536       Auxiliary taint, defined for and used by distros
+    T  17  131072      Kernel was built with the struct randomization plugin
+    _  18  262144      (null)
+    _  19  524288      (null)
+    _  20  1048576     (null)
+    _  21  2097152     (null)
+    _  22  4194304     (null)
+    _  23  8388608     (null)
+    _  24  16777216    (null)
+    _  25  33554432    (null)
+    _  26  67108864    (null)
+    _  27  134217728   (null)
+    _  28  268435456   (null)
+    _  29  536870912   (null)
+    _  30  1073741824  (null)
+    N  31  2147483648  SUSE: An unsupported kernel module was loaded
 
 -----------------------------------------------------------------------------
 
-// $Id: README.md,v 1.2 2022/03/04 08:54:27 ralph Exp $
-// vim:set fileencoding=utf8 fileformat=unix filetype=text tabstop=2 expandtab:
+<!--
+$Id: README.md,v 1.3 2022/09/29 20:15:03 ralph Exp $
+vim:set fileencoding=utf8 fileformat=unix filetype=text tabstop=2 expandtab:
+ -->

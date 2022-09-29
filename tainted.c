@@ -1,4 +1,4 @@
-/* $Id: tainted.c,v 1.9 2022/03/02 14:22:33 ralph Exp $
+/* $Id: tainted.c,v 1.10 2022/09/29 20:15:03 ralph Exp $
  * vim:set fileencoding=utf8 fileformat=unix filetype=c tabstop=2 noexpandtab:
  *
  * Tainted: Tool to get the current taint value and print each set bit in
@@ -19,10 +19,11 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <string.h>
+#include <unistd.h>
 
 #define PROC_TAINTED "/proc/sys/kernel/tainted"
 
-// we try to align the version number with the CVS commit :-)  
+// we try to align the version number with the CVS commit :-)
 #define HELP_FMT "%s [-?hix value] Version 2.0.6 (%s)\nWithout command-line options this tool will print the\n" \
 								 "current taint value (from proc FS) with information about each set bit.\n"                    \
 								 "-h -?    - this help\n"                                                                       \
@@ -133,6 +134,7 @@ int main(int argc, char **argv)
 			printf(HELP_FMT, argv[0], __DATE__);
 			return 0;
 		case 'x':
+		  /* identifier "optarg" is undefined */
 			ulFlags = (unsigned long)strtoull(optarg, NULL, 0); /* we accept also hex/oct */
 			if (errno == ERANGE || errno == EINVAL)
 			{
@@ -162,7 +164,7 @@ int main(int argc, char **argv)
 			printf("0");
 	} /* for i */
 	printf("] Hex cleared: 0x%08lx\n", ulFlags & 0x1ffff);
-	
+
 	printf("%-5s %-11s %-64s\n", "[F/bit]", "[bit val]", "[description]");
 	// was: for (i = 0; szKernelTaintDescription[i] && i <  sizeof(long int) * 8; i++)
 	for (i = 0; i<32; i++)
@@ -172,6 +174,6 @@ int main(int argc, char **argv)
 						 szFlags[i], i, BIT(i), szKernelTaintDescription[i]);
 	} /* for i */
 
-	
+
 	return 0;
 }

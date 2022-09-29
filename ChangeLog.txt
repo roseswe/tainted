@@ -7,6 +7,8 @@ Changelog
 
 Changes
 ~~~~~~~
+- Enhanced documenation. [roseswe]
+- Chnagelog updated. [roseswe]
 - Ported ReadMe to MarkDown. [roseswe]
 
 Other
