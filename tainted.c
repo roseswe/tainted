@@ -1,4 +1,4 @@
-/* $Id: tainted.c,v 1.10 2022/09/29 20:15:03 ralph Exp $
+/* $Id: tainted.c,v 1.11 2022/11/08 13:38:49 ralph Exp $
  * vim:set fileencoding=utf8 fileformat=unix filetype=c tabstop=2 noexpandtab:
  *
  * Tainted: Tool to get the current taint value and print each set bit in
@@ -24,7 +24,7 @@
 #define PROC_TAINTED "/proc/sys/kernel/tainted"
 
 // we try to align the version number with the CVS commit :-)
-#define HELP_FMT "%s [-?hix value] Version 2.0.6 (%s)\nWithout command-line options this tool will print the\n" \
+#define HELP_FMT "%s [-?hix value] Version 2.0.7 (%s)\nWithout command-line options this tool will print the\n" \
 								 "current taint value (from proc FS) with information about each set bit.\n"                    \
 								 "-h -?    - this help\n"                                                                       \
 								 "-i -l    - print information about the different taint bits (list)\n"                         \
@@ -52,10 +52,11 @@ enum
 	TAINT_LIVEPATCH, /* 15 new stuff follows */
 	TAINT_AUX,
 	TAINT_STRUCT_RANDOM, /* 17 */
-	TAINT_FUTURE1,
-	TAINT_FUTURE2,
+	TAINT_FUTURE_18,
+	TAINT_FUTURE_19,
 	/* 20 */
 
+  TAINT_FUTURE_31 = 30,		/* Bit 31, found 08.11.2022 with an Azure Kernel */
 	/* #  define TAINT_NO_SUPPORT             31    (SUSE) */
 	TAINT_NO_SUPPORT = 31,
 };
@@ -82,11 +83,12 @@ static const char *szKernelTaintDescription[] = {
 		[TAINT_STRUCT_RANDOM] = "Kernel was built with the struct randomization plugin",
 
 		NULL, NULL, NULL,  /* 20 */
-		NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, /* 30 */
+		NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, /* 29 */
+		[TAINT_FUTURE_31] = "Bit 30 - Undefined, maybe Azure specific?", /* 30 */
 		[TAINT_NO_SUPPORT] = "SUSE: An unsupported kernel module was loaded",  /* 31 */
 		NULL};
 
-static const char *szFlags = "PFSRMBUDAWCIOELKXT_____________N";
+static const char *szFlags = "PFSRMBUDAWCIOELKXT____________?N";
 
 static unsigned long read_flags(void)
 {

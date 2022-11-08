@@ -11,6 +11,10 @@ Changes
 - Chnagelog updated. [roseswe]
 - Ported ReadMe to MarkDown. [roseswe]
 
+Fix
+~~~
+- Optarg warning, markdown issues ✏️ [roseswe]
+
 Other
 ~~~~~
 - Update README.txt. [Ralph Roth]

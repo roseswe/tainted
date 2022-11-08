@@ -12,9 +12,11 @@ The Linux kernel maintains a "tainted state" that is included in kernel error me
 
 The current taint value is extracted by `tainted` from /proc/sys/kernel/tainted or can be passed on the command line with the option -x
 
-NOTE: SLES 12/SLES 15/openSUSE 15 sets the bit 31 (N) of the tainted value. The program has been adapted to scope with this special behavior (tainted version 2.0.6++). See also the SUSE Technical Information Document (TID) #000016321 (3582750) -- Tainted kernel - <https://www.suse.com/support/kb/doc/?id=000016321> and /usr/src/linux/Documentation/sysctl/kernel.txt
+NOTE: SLES 12/SLES 15/openSUSE 15 sets the bit 31 (N) of the tainted value. The program has been adapted to scope with this special behavior (tainted version 2.0.6++). See also the SUSE Technical Information Document (TID) #000016321 (3582750) -- Tainted kernel - <https://www.suse.com/support/kb/doc/?id=000016321> and /usr/src/linux/Documentation/sysctl/kernel.txt | <https://docs.kernel.org/admin-guide/tainted-kernels.html> | <https://www.kernel.org/doc/Documentation/admin-guide/tainted-kernels.rst>
 
 ## How to build
+
+A Makefile is provided
 
     $ make
     cc -c -Wall tainted.c -o tainted.o
@@ -36,12 +38,19 @@ NOTE: SLES 12/SLES 15/openSUSE 15 sets the bit 31 (N) of the tainted value. The 
     W   9  512       A kernel warning has occurred
     O  12  4096      An out-of-tree module has been loaded
 
-    $ ./tainted -x 2147495936
-    Taint value (original): 2147495936 0x80003000  (cleared): 12288 0x00003000 (0000000011000000000000)
-    [F/bit] [bit val] [description]
-    O  12  4096      An out-of-tree module has been loaded
-    E  13  8192      An unsigned module has been loaded in a kernel supporting
-                     module signature
+    $ ./tainted -x 3221237761
+    Taint value (original): 3221237761, Hex: 0xc0003001
+    Binary: [011000000000000000011000000000001] Hex cleared: 0x00003001
+    [F/bit] [bit val]   [description]
+    P   0  1           (G/P) A module with a non-GPL license has been loaded,
+                        this includes modules with no license.
+                        Set by modutils >= 2.4.9 and module-init-tools
+    O  12  4096        An out-of-tree module has been loaded
+    E  13  8192        An unsigned module has been loaded in a kernel supporting
+                        module signature
+    ?  30  1073741824  Bit 30 - Undefined, maybe Azure specific?
+    N  31  2147483648  SUSE: An unsupported kernel module was loaded
+
 
     $ cat /proc/sys/kernel/tainted
     2147561472
@@ -98,12 +107,12 @@ NOTE: SLES 12/SLES 15/openSUSE 15 sets the bit 31 (N) of the tainted value. The 
     _  27  134217728   (null)
     _  28  268435456   (null)
     _  29  536870912   (null)
-    _  30  1073741824  (null)
+    ?  30  1073741824  Bit 30 - Undefined, maybe Azure specific?
     N  31  2147483648  SUSE: An unsupported kernel module was loaded
 
 -----------------------------------------------------------------------------
 
 <!--
-$Id: README.md,v 1.3 2022/09/29 20:15:03 ralph Exp $
+$Id: README.md,v 1.4 2022/11/08 13:38:49 ralph Exp $
 vim:set fileencoding=utf8 fileformat=unix filetype=text tabstop=2 expandtab:
  -->
