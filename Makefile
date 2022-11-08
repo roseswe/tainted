@@ -30,4 +30,5 @@ $(EXECUTABLE)_static:
 
 changelog:
 	gitchangelog > ChangeLog.txt
+	git commit -m "chg: Updated Changelog"
 	cat ChangeLog.txt

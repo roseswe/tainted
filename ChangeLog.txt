@@ -17,6 +17,7 @@ Fix
 
 Other
 ~~~~~
+- ✨/📝  added bit 30, found on an Azure Kernel. [roseswe]
 - Update README.txt. [Ralph Roth]
 - Update README.txt. [Ralph Roth]
 
