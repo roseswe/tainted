@@ -7,6 +7,7 @@ Changelog
 
 Changes
 ~~~~~~~
+- Updated Changelog &Changelog  handling. [roseswe]
 - Enhanced documenation. [roseswe]
 - Chnagelog updated. [roseswe]
 - Ported ReadMe to MarkDown. [roseswe]
