@@ -84,7 +84,7 @@ static const char *szKernelTaintDescription[] = {
 
 		NULL, NULL, NULL,  /* 20 */
 		NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, /* 29 */
-		[TAINT_FUTURE_31] = "Bit 30 - Undefined, maybe Azure specific?", /* 30 */
+		[TAINT_FUTURE_31] = "Bit 30 - Undefined, maybe Public Cloud (Azure/AWS) specific?", /* 30 */
 		[TAINT_NO_SUPPORT] = "SUSE: An unsupported kernel module was loaded",  /* 31 */
 		NULL};
 
