@@ -7,6 +7,16 @@ Changelog
 
 Changes
 ~~~~~~~
+- Bit 30 also found on AWS kernels. [roseswe]
+
+
+2.0.7 (2022-11-08)
+------------------
+
+Changes
+~~~~~~~
+- Makefile. [roseswe]
+- Updated Changelog. [roseswe]
 - Updated Changelog &Changelog  handling. [roseswe]
 - Enhanced documenation. [roseswe]
 - Chnagelog updated. [roseswe]
@@ -35,17 +45,6 @@ Changes
 ~~~~~~~
 - Documented chages for 2.0.6. [roseswe]
 - Added static target to ignore list. [roseswe]
-
-Other
-~~~~~
-- Add: ChangeLog handling. [roseswe]
-
-
-2.0.5 (2022-02-21)
-------------------
-
-Changes
-~~~~~~~
 - V2.0.5 print now original and cleared taint flag. [roseswe]
 - Added github URL. [roseswe]
 
@@ -55,6 +54,7 @@ Fix
 
 Other
 ~~~~~
+- Add: ChangeLog handling. [roseswe]
 - Merge pull request #3 from roseswe:roseswe/issue2. [Ralph Roth]
 
   Add CLI option "-?" to program and documentation
