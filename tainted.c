@@ -1,4 +1,4 @@
-/* $Id: tainted.c,v 1.11 2022/11/08 13:38:49 ralph Exp $
+/* $Id: tainted.c,v 1.13 2023/02/15 13:23:03 ralph Exp $
  * vim:set fileencoding=utf8 fileformat=unix filetype=c tabstop=2 noexpandtab:
  *
  * Tainted: Tool to get the current taint value and print each set bit in
@@ -24,7 +24,7 @@
 #define PROC_TAINTED "/proc/sys/kernel/tainted"
 
 // we try to align the version number with the CVS commit :-)
-#define HELP_FMT "%s [-?hix value] Version 2.0.7 (%s)\nWithout command-line options this tool will print the\n" \
+#define HELP_FMT "%s [-?hix value] Version 2.0.8 (%s)\nWithout command-line options this tool will print the\n" \
 								 "current taint value (from proc FS) with information about each set bit.\n"                    \
 								 "-h -?    - this help\n"                                                                       \
 								 "-i -l    - print information about the different taint bits (list)\n"                         \
@@ -56,9 +56,9 @@ enum
 	TAINT_FUTURE_19,
 	/* 20 */
 
-  TAINT_FUTURE_31 = 30,		/* Bit 31, found 08.11.2022 with an Azure Kernel */
-	/* #  define TAINT_NO_SUPPORT             31    (SUSE) */
-	TAINT_NO_SUPPORT = 31,
+	/* #  define TAINT_NO_SUPPORT             30? 31?    ("N", SUSE) found 08.11.2022 with an Azure Kernel */
+	TAINT_NO_SUPPORT = 30,
+	TAINT_FUTURE_31 = 31,		/* Bit 31 */
 };
 
 /* Extracted from linux/Documentation/sysctl/kernel.txt */
@@ -78,17 +78,17 @@ static const char *szKernelTaintDescription[] = {
 		[TAINT_OOT_MODULE] = "An out-of-tree module has been loaded",
 		[TAINT_UNSIGNED_MODULE] = "An unsigned module has been loaded in a kernel supporting\n                    module signature",
 		[TAINT_SOFTLOCKUP] = "A soft lockup has previously occurred on the system",
-		[TAINT_LIVEPATCH] = "The kernel has been live patched", /* 15 new stuff follows */
-		[TAINT_AUX] = "Auxiliary taint, defined for and used by distros",
-		[TAINT_STRUCT_RANDOM] = "Kernel was built with the struct randomization plugin",
+		[TAINT_LIVEPATCH] = "The kernel has been live patched", /* 0x8000 - 15 new stuff follows */
+		[TAINT_AUX] = "Auxiliary taint, defined for and used by distros",  /* 0x10000 */
+		[TAINT_STRUCT_RANDOM] = "Kernel was built with the struct randomization plugin", /* 0x20000 */
 
 		NULL, NULL, NULL,  /* 20 */
 		NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, /* 29 */
-		[TAINT_FUTURE_31] = "Bit 30 - Undefined, maybe Public Cloud (Azure/AWS) specific?", /* 30 */
-		[TAINT_NO_SUPPORT] = "SUSE: An unsupported kernel module was loaded",  /* 31 */
+		[TAINT_NO_SUPPORT] = "Unsupported modules loaded, maybe Public Cloud (Azure/AWS) specific?\n                    Maybe not YES! certified?", /* 30 0x40000000 */
+		[TAINT_FUTURE_31 ] = "SUSE special???? ",  /* 31, 0x80000000 */
 		NULL};
 
-static const char *szFlags = "PFSRMBUDAWCIOELKXT____________?N";
+static const char *szFlags = "PFSRMBUDAWCIOELKXT____________N?";
 
 static unsigned long read_flags(void)
 {

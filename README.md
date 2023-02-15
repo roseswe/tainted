@@ -4,7 +4,7 @@ tainted is a command-line (CLI) tool to get the current Linux Kernel taint value
 
 (C) 2014 - Nikolay Aleksandrov <nikolay@redhat.com> (Version 1.0)
 
-(c) 2022 - Ralph Roth (Version 2.x.x) - enhancements and fixes for SLES 12, 15, openSUSE
+(c) 2022, 2023 - Ralph Roth (Version 2.x.x) - enhancements and fixes for SLES 12, 15, openSUSE
 
 Homepage of version 2.x.x = <https://github.com/roseswe/tainted>
 
@@ -12,11 +12,11 @@ The Linux kernel maintains a "tainted state" that is included in kernel error me
 
 The current taint value is extracted by `tainted` from /proc/sys/kernel/tainted or can be passed on the command line with the option -x
 
-NOTE: SLES 12/SLES 15/openSUSE 15 sets the bit 31 (N) of the tainted value. The program has been adapted to scope with this special behavior (tainted version 2.0.6++). See also the SUSE Technical Information Document (TID) #000016321 (3582750) -- Tainted kernel - <https://www.suse.com/support/kb/doc/?id=000016321> and /usr/src/linux/Documentation/sysctl/kernel.txt | <https://docs.kernel.org/admin-guide/tainted-kernels.html> | <https://www.kernel.org/doc/Documentation/admin-guide/tainted-kernels.rst>
+NOTE: SLES 12/SLES 15/openSUSE 15 sets the bit 30? (N) of the tainted value. The program has been adapted to scope with this special behavior (tainted version 2.0.6++). See also the SUSE Technical Information Document (TID) #000016321 (3582750) -- Tainted kernel - <https://www.suse.com/support/kb/doc/?id=000016321> and /usr/src/linux/Documentation/sysctl/kernel.txt | <https://docs.kernel.org/admin-guide/tainted-kernels.html> | <https://www.kernel.org/doc/Documentation/admin-guide/tainted-kernels.rst>
 
 ## How to build
 
-A Makefile is provided
+A Makefile is provided for gcc
 
     $ make
     cc -c -Wall tainted.c -o tainted.o
@@ -24,13 +24,13 @@ A Makefile is provided
 
 ## Usage
 
-    $ ./tainted -h
-    ./tainted [-?hix value] Version 2.0.5 (Feb 21 2022)
+    ./tainted [-?hix value] Version 2.0.8 (Feb 15 2023)
     Without command-line options this tool will print the
     current taint value (from proc FS) with information about each set bit.
     -h -?    - this help
-    -i       - print information about the different taint bits
+    -i -l    - print information about the different taint bits (list)
     -x value - print taint information using value instead
+
 
     $ ./tainted -x 2147488256
     Taint value (original): 2147488256 0x80001200  (cleared): 4608 0x00001200 (0000000001001000000000)
@@ -67,7 +67,6 @@ A Makefile is provided
 
 -----------------------------------------------------------------------------
 
-    $ ./tainted -l
     Taint value (original): 18446744073709551615, Hex: 0xffffffffffffffff
     Binary: [111111111111111111111111111111111] Hex cleared: 0x0001ffff
     [F/bit] [bit val]   [description]
@@ -79,9 +78,9 @@ A Makefile is provided
     R   3  8           A module was forcibly unloaded from the system by rmmod -f
     M   4  16          A hardware machine check error (MCE) occurred on the system
     B   5  32          A bad page was discovered on the system
-    U   6  64          (N/U) The user has asked that the system be marked "tainted". This
-                        could be because they are running software that directly
-                        modifies the hardware, or for other reasons
+    U   6  64          (N/U) The user has asked that the system be marked "tainted".
+                        This could be because they are running software that
+                        directly modifies the hardware, or for other reasons
     D   7  128         The system has died
     A   8  256         The ACPI DSDT has been overridden with one supplied by the
                         user instead of using the one provided by the hardware
@@ -107,12 +106,13 @@ A Makefile is provided
     _  27  134217728   (null)
     _  28  268435456   (null)
     _  29  536870912   (null)
-    ?  30  1073741824  Bit 30 - Undefined, maybe Azure specific?
-    N  31  2147483648  SUSE: An unsupported kernel module was loaded
+    N  30  1073741824  Unsupported modules loaded, maybe Public Cloud (Azure/AWS) specific?
+                        Maybe not YES! certified?
+    ?  31  2147483648  SUSE special????
 
 -----------------------------------------------------------------------------
 
 <!--
-$Id: README.md,v 1.4 2022/11/08 13:38:49 ralph Exp $
+$Id: README.md,v 1.5 2023/02/15 13:23:03 ralph Exp $
 vim:set fileencoding=utf8 fileformat=unix filetype=text tabstop=2 expandtab:
  -->
