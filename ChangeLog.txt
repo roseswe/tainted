@@ -2,12 +2,17 @@ Changelog
 =========
 
 
-(unreleased)
-------------
+2.0.8 (2023-02-15)
+------------------
 
 Changes
 ~~~~~~~
+- Updated Changelog (by Makefile) [roseswe]
 - Bit 30 also found on AWS kernels. [roseswe]
+
+Fix
+~~~
+- ? Bit 30/31 unclear how to decode. This may correct it. [roseswe]
 
 
 2.0.7 (2022-11-08)
