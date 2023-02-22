@@ -1,4 +1,7 @@
 ## 22.02.2023
+## Not working yet!
+## See also:  https://github.com/actions/upload-release-asset, https://github.com/search?q=github+release+actions
+
 name: Compile and Release
 on:
   push:
@@ -19,8 +22,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: v2.0.9
-          release_name: Release v2.0.9
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
           body: |
             A new release of the code has been created.
           draft: false
