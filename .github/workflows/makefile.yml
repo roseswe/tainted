@@ -17,4 +17,8 @@ jobs:
     - name: Build Executable
       run: make
 
-
+    - name: Upload binary
+      uses: actions/upload-artifact@v3
+      with:
+        name: tainted
+        path: ./tainted
