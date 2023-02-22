@@ -19,14 +19,14 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: v2.0.0
-          release_name: Release v2.0.0
+          tag_name: v2.0.9
+          release_name: Release v2.0.9
           body: |
             A new release of the code has been created.
           draft: false
           prerelease: false
       - name: Upload binary
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: tainted
           path: ./tainted
