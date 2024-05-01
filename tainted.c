@@ -1,11 +1,11 @@
-/* $Id: tainted.c,v 1.13 2023/02/15 13:23:03 ralph Exp $
+/* $Id: tainted.c,v 1.15 2024/05/01 15:53:55 ralph Exp $
  * vim:set fileencoding=utf8 fileformat=unix filetype=c tabstop=2 noexpandtab:
  *
  * Tainted: Tool to get the current taint value and print each set bit in
  * 	        human readable format
  *
  * (C) 2014 - Nikolay Aleksandrov <nikolay@redhat.com> - https://github.com/NikAleksandrov/tainted
- * (c) 2022 - Ralph Roth - enhancements and fixes for SLES 12, 15, openSUSE - https://github.com/roseswe/tainted
+ * (c) 2022, 2024 - Ralph Roth - enhancements and fixes for SLES 12, 15, openSUSE - https://github.com/roseswe/tainted
  *
  * Compile with:
  * 	gcc -O2 -o tainted tainted.c
@@ -24,7 +24,7 @@
 #define PROC_TAINTED "/proc/sys/kernel/tainted"
 
 // we try to align the version number with the CVS commit :-)
-#define HELP_FMT "%s [-?hix value] Version 2.0.8 (%s)\nWithout command-line options this tool will print the\n" \
+#define HELP_FMT "%s [-?hix value] Version 2.0.9 (%s)\nWithout command-line options this tool will print the\n" \
 								 "current taint value (from proc FS) with information about each set bit.\n"                    \
 								 "-h -?    - this help\n"                                                                       \
 								 "-i -l    - print information about the different taint bits (list)\n"                         \
@@ -75,7 +75,7 @@ static const char *szKernelTaintDescription[] = {
 		[TAINT_WARN] = "A kernel warning has occurred",
 		[TAINT_CRAP] = "A module from drivers/staging was loaded",
 		[TAINT_FIRMWARE_WORKAROUND] = "The system is working around a severe firmware bug",
-		[TAINT_OOT_MODULE] = "An out-of-tree module has been loaded",
+		[TAINT_OOT_MODULE] = "An out-of-tree module has been loaded (not shipped with Kernel)",
 		[TAINT_UNSIGNED_MODULE] = "An unsigned module has been loaded in a kernel supporting\n                    module signature",
 		[TAINT_SOFTLOCKUP] = "A soft lockup has previously occurred on the system",
 		[TAINT_LIVEPATCH] = "The kernel has been live patched", /* 0x8000 - 15 new stuff follows */
