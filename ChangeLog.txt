@@ -2,11 +2,32 @@ Changelog
 =========
 
 
+(unreleased)
+------------
+
+Changes
+~~~~~~~
+- Small enhancements (W) [roseswe]
+- Message enhanced. [roseswe]
+- Giving up here on GitHub actions. [roseswe]
+
+Fix
+~~~
+- Bumped version number. [roseswe]
+- Deprecated actions updated. [roseswe]
+
+Other
+~~~~~
+- Add: upload action. [roseswe]
+- Add: release action 1st version. [roseswe]
+
+
 2.0.8 (2023-02-15)
 ------------------
 
 Changes
 ~~~~~~~
+- Updated Changelog (by Makefile) [roseswe]
 - Updated Changelog (by Makefile) [roseswe]
 - Bit 30 also found on AWS kernels. [roseswe]
 
