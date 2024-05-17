@@ -1,4 +1,4 @@
-/* $Id: tainted.c,v 1.15 2024/05/01 15:53:55 ralph Exp $
+/* $Id: tainted.c,v 1.16 2024/05/17 13:23:01 ralph Exp $
  * vim:set fileencoding=utf8 fileformat=unix filetype=c tabstop=2 noexpandtab:
  *
  * Tainted: Tool to get the current taint value and print each set bit in
@@ -72,7 +72,7 @@ static const char *szKernelTaintDescription[] = {
 		[TAINT_USER] = "(N/U) The user has asked that the system be marked \"tainted\".\n                    This could be because they are running software that \n                    directly modifies the hardware, or for other reasons",
 		[TAINT_DIE] = "The system has died",
 		[TAINT_OVERRIDEN_ACPI_TABLE] = "The ACPI DSDT has been overridden with one supplied by the\n                    user instead of using the one provided by the hardware",
-		[TAINT_WARN] = "A kernel warning has occurred",
+		[TAINT_WARN] = "A kernel warning has occurred (kernel issued warning)",
 		[TAINT_CRAP] = "A module from drivers/staging was loaded",
 		[TAINT_FIRMWARE_WORKAROUND] = "The system is working around a severe firmware bug",
 		[TAINT_OOT_MODULE] = "An out-of-tree module has been loaded (not shipped with Kernel)",

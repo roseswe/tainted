@@ -4,7 +4,7 @@ tainted is a command-line (CLI) tool to get the current Linux Kernel taint value
 
 (C) 2014 - Nikolay Aleksandrov <nikolay@redhat.com> (Version 1.0)
 
-(c) 2022, 2023 - Ralph Roth (Version 2.x.x) - enhancements and fixes for SLES 12, 15, openSUSE
+(c) 2022, 2024 - Ralph Roth (Version 2.x.x) - enhancements and fixes for SLES 12, 15, openSUSE
 
 Homepage of version 2.x.x = <https://github.com/roseswe/tainted>
 
@@ -24,7 +24,8 @@ A Makefile is provided for gcc
 
 ## Usage
 
-    ./tainted [-?hix value] Version 2.0.8 (Feb 15 2023)
+    $ ./tainted -?
+    tainted [-?hix value] Version 2.0.9 (May 17 2024)
     Without command-line options this tool will print the
     current taint value (from proc FS) with information about each set bit.
     -h -?    - this help
@@ -45,12 +46,12 @@ A Makefile is provided for gcc
     P   0  1           (G/P) A module with a non-GPL license has been loaded,
                         this includes modules with no license.
                         Set by modutils >= 2.4.9 and module-init-tools
-    O  12  4096        An out-of-tree module has been loaded
+    O  12  4096        An out-of-tree module has been loaded (not shipped with Kernel)
     E  13  8192        An unsigned module has been loaded in a kernel supporting
                         module signature
-    ?  30  1073741824  Bit 30 - Undefined, maybe Azure specific?
-    N  31  2147483648  SUSE: An unsupported kernel module was loaded
-
+    N  30  1073741824  Unsupported modules loaded, maybe Public Cloud (Azure/AWS) specific?
+                        Maybe not YES! certified?
+    ?  31  2147483648  SUSE special????
 
     $ cat /proc/sys/kernel/tainted
     2147561472
@@ -84,7 +85,7 @@ A Makefile is provided for gcc
     D   7  128         The system has died
     A   8  256         The ACPI DSDT has been overridden with one supplied by the
                         user instead of using the one provided by the hardware
-    W   9  512         A kernel warning has occurred
+    W   9  512         A kernel warning has occurred (kernel issued warning)
     C  10  1024        A module from drivers/staging was loaded
     I  11  2048        The system is working around a severe firmware bug
     O  12  4096        An out-of-tree module has been loaded
@@ -113,6 +114,6 @@ A Makefile is provided for gcc
 -----------------------------------------------------------------------------
 
 <!--
-$Id: README.md,v 1.5 2023/02/15 13:23:03 ralph Exp $
+$Id: README.md,v 1.6 2024/05/17 13:23:00 ralph Exp $
 vim:set fileencoding=utf8 fileformat=unix filetype=text tabstop=2 expandtab:
  -->
