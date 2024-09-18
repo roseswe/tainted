@@ -113,7 +113,15 @@ A Makefile is provided for gcc
 
 -----------------------------------------------------------------------------
 
+### Note for Kernel taints coming from DRBD (4096, O) under SLES
+
+    2024-09-18T12 38 41.392033+02 00 host kernel  [ 5053.593052][T328362] drbd  loading out-of-tree module taints kernel.
+
+Workaround:
+
+    zypper remove drbd-kmp-default
+
 <!--
-$Id: README.md,v 1.6 2024/05/17 13:23:00 ralph Exp $
+$Id: README.md,v 1.7 2024/09/18 14:12:06 ralph Exp $
 vim:set fileencoding=utf8 fileformat=unix filetype=text tabstop=2 expandtab:
  -->

@@ -1,4 +1,4 @@
-/* $Id: tainted.c,v 1.16 2024/05/17 13:23:01 ralph Exp $
+/* $Id: tainted.c,v 1.17 2024/09/18 14:12:07 ralph Exp $
  * vim:set fileencoding=utf8 fileformat=unix filetype=c tabstop=2 noexpandtab:
  *
  * Tainted: Tool to get the current taint value and print each set bit in
@@ -24,11 +24,12 @@
 #define PROC_TAINTED "/proc/sys/kernel/tainted"
 
 // we try to align the version number with the CVS commit :-)
-#define HELP_FMT "%s [-?hix value] Version 2.0.9 (%s)\nWithout command-line options this tool will print the\n" \
+#define HELP_FMT "%s [-?hix value] Version 2.1.0 (%s)\nWithout command-line options this tool will print the\n" \
 								 "current taint value (from proc FS) with information about each set bit.\n"                    \
 								 "-h -?    - this help\n"                                                                       \
 								 "-i -l    - print information about the different taint bits (list)\n"                         \
-								 "-x value - print taint information using value instead"
+								 "-x value - print taint information using value instead\n\n" \
+								 "Hint: Taints are stored in %s\n"
 #define BIT(x) (1UL << x)
 
 /* Extracted from linux/include/linux/kernel.h */
@@ -133,7 +134,7 @@ int main(int argc, char **argv)
 			break;
 		case 'h':
 		case '?':
-			printf(HELP_FMT, argv[0], __DATE__);
+			printf(HELP_FMT, argv[0], __DATE__, PROC_TAINTED);
 			return 0;
 		case 'x':
 		  /* identifier "optarg" is undefined */
