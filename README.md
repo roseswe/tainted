@@ -121,7 +121,7 @@ Workaround:
 
     zypper remove drbd-kmp-default
 
-LivePatching set currently the O & K taint flag. There is IMHO nothing you can do to avoid this...
+LivePatching sets currently the O & K taint flag. There is IMHO nothing you can do to avoid this...
 
     2024-08-01T13 38 52.679969+02 00 host kernel  [   11.031505] livepatch_11_150300_2_2  loading out-of-tree module taints kernel.
 
