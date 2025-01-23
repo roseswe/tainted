@@ -1,5 +1,5 @@
 # vim:set fileencoding=utf8 fileformat=unix filetype=makefile tabstop=2 noexpandtab:
-# $Id: Makefile,v 1.6 2023/02/03 23:05:58 ralph Exp $
+# $Id: Makefile,v 1.7 2024/10/07 06:38:42 ralph Exp $
 
 CC=/usr/bin/gcc
 CFLAGS=-c -Wall -O2 -s
@@ -30,5 +30,5 @@ $(EXECUTABLE)_static:
 
 changelog:
 	gitchangelog > ChangeLog.txt
-	git commit -a -s -m "chg: Updated Changelog (by Makefile)"
+	git commit -a -s -m "chg: Updated Changelog (by Makefile) $(date +%Y%m%d)"
 	cat ChangeLog.txt

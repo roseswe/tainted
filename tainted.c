@@ -1,11 +1,11 @@
-/* $Id: tainted.c,v 1.17 2024/09/18 14:12:07 ralph Exp $
+/* $Id: tainted.c,v 1.18 2025/01/23 19:42:57 ralph Exp $
  * vim:set fileencoding=utf8 fileformat=unix filetype=c tabstop=2 noexpandtab:
  *
  * Tainted: Tool to get the current taint value and print each set bit in
  * 	        human readable format
  *
  * (C) 2014 - Nikolay Aleksandrov <nikolay@redhat.com> - https://github.com/NikAleksandrov/tainted
- * (c) 2022, 2024 - Ralph Roth - enhancements and fixes for SLES 12, 15, openSUSE - https://github.com/roseswe/tainted
+ * (c) 2022, 2025 - Ralph Roth - enhancements and fixes for SLES 12, 15, openSUSE - https://github.com/roseswe/tainted
  *
  * Compile with:
  * 	gcc -O2 -o tainted tainted.c
@@ -23,13 +23,14 @@
 
 #define PROC_TAINTED "/proc/sys/kernel/tainted"
 
-// we try to align the version number with the CVS commit :-)
-#define HELP_FMT "%s [-?hix value] Version 2.1.0 (%s)\nWithout command-line options this tool will print the\n" \
+// we try to align the version number with the CVS commit :-)  1.17 -> 2.1.17
+#define HELP_FMT "%s [-?hix value] Version 2.1.18 (%s)\nWithout command-line options this tool will print the\n" \
 								 "current taint value (from proc FS) with information about each set bit.\n"                    \
 								 "-h -?    - this help\n"                                                                       \
 								 "-i -l    - print information about the different taint bits (list)\n"                         \
-								 "-x value - print taint information using value instead\n\n" \
-								 "Hint: Taints are stored in %s\n"
+								 "-x value - print taint information using value instead\n\n" 																	\
+								 "Hint: Taints are stored in %s\n" 																															\
+								 "Sourcecode available at: https://github.com/roseswe/tainted\n"
 #define BIT(x) (1UL << x)
 
 /* Extracted from linux/include/linux/kernel.h */
