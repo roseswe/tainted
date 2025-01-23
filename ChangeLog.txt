@@ -7,6 +7,9 @@ Changelog
 
 Changes
 ~~~~~~~
+- Copyright, LivePatching. [roseswe]
+- Dox enhanced, help msg enhanced. [roseswe]
+- Updated Changelog (by Makefile) [roseswe]
 - Small enhancements (W) [roseswe]
 - Message enhanced. [roseswe]
 - Giving up here on GitHub actions. [roseswe]
@@ -18,6 +21,7 @@ Fix
 
 Other
 ~~~~~
+- Add: github repo, small enhancements. [roseswe]
 - Add: upload action. [roseswe]
 - Add: release action 1st version. [roseswe]
 
