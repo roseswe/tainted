@@ -4,7 +4,7 @@ tainted is a command-line (CLI) tool to get the current Linux Kernel taint value
 
 (C) 2014 - Nikolay Aleksandrov <nikolay@redhat.com> (Version 1.0)
 
-(c) 2022, 2024 - Ralph Roth (Version 2.x.x) - enhancements and fixes for SLES 12, 15, openSUSE
+(c) 2022-2025 by Ralph Roth (Version 2.x.x) - enhancements and fixes for SLES 12, 15, openSUSE, Debian/Ubuntu
 
 Homepage of version 2.x.x = <https://github.com/roseswe/tainted>
 
@@ -94,7 +94,7 @@ A Makefile is provided for gcc
     L  14  16384       A soft lockup has previously occurred on the system
     K  15  32768       The kernel has been live patched
     X  16  65536       Auxiliary taint, defined for and used by distros
-    T  17  131072      Kernel was built with the struct randomization plugin
+    T  17  131072      Kernel waKOB05140s built with the struct randomization plugin
     _  18  262144      (null)
     _  19  524288      (null)
     _  20  1048576     (null)
@@ -120,6 +120,10 @@ A Makefile is provided for gcc
 Workaround:
 
     zypper remove drbd-kmp-default
+
+LivePatching set currently the O & K taint flag. There is IMHO nothing you can do to avoid this...
+
+    2024-08-01T13 38 52.679969+02 00 host kernel  [   11.031505] livepatch_11_150300_2_2  loading out-of-tree module taints kernel.
 
 <!--
 $Id: README.md,v 1.7 2024/09/18 14:12:06 ralph Exp $
