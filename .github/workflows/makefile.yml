@@ -1,5 +1,10 @@
 name: Makefile CI
 
+# 03725 - https://github.com/roseswe/tainted/security/code-scanning/26
+permissions:
+  contents: read
+  pull-requests: write
+
 on:
   push:
     branches: [ master ]
