@@ -1,7 +1,8 @@
 # This workflow uses actions that are not certified by GitHub.
 # They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
+# separate terms of service, privacy policy, and support documentation.
+
+# 03/25: ubuntu-latest pipelines will use ubuntu-24.04 soon. For more details, see https://github.com/actions/runner-images/issues/10636
 
 name: flawfinder
 
@@ -33,6 +34,7 @@ jobs:
           output: 'flawfinder_results.sarif'
 
       - name: Upload analysis results to GitHub Security tab
-        uses: github/codeql-action/upload-sarif@v1
+        ### ??? https://github.blog/changelog/2023-01-18-code-scanning-codeql-action-v1-is-now-deprecated/
+        uses: github/codeql-action/upload-sarif@v2
         with:
           sarif_file: ${{github.workspace}}/flawfinder_results.sarif

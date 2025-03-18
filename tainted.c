@@ -22,15 +22,6 @@
 #include <unistd.h>
 
 #define PROC_TAINTED "/proc/sys/kernel/tainted"
-
-// we try to align the version number with the CVS commit :-)  1.17 -> 2.1.17
-#define HELP_FMT "%s [-?hix value] Version 2.1.18 (%s)\nWithout command-line options this tool will print the\n" \
-								 "current taint value (from proc FS) with information about each set bit.\n"                    \
-								 "-h -?    - this help\n"                                                                       \
-								 "-i -l    - print information about the different taint bits (list)\n"                         \
-								 "-x value - print taint information using value instead\n\n" 																	\
-								 "Hint: Taints are stored in %s\n" 																															\
-								 "Sourcecode available at: https://github.com/roseswe/tainted\n"
 #define BIT(x) (1UL << x)
 
 /* Extracted from linux/include/linux/kernel.h */
@@ -135,7 +126,16 @@ int main(int argc, char **argv)
 			break;
 		case 'h':
 		case '?':
-			printf(HELP_FMT, argv[0], __DATE__, PROC_TAINTED);
+		  /* If format strings can be influenced by an attacker, they can be exploited (CWE-134)
+			printf(HELP_FMT, argv[0], __DATE__, PROC_TAINTED); */
+			printf("%s [-?hix value] Version 2.2.1 (%s)\nWithout command-line options this tool will print the\n"
+				"current taint value (from proc FS) with information about each set bit.\n"
+				"-h -?    - this help\n"
+				"-i -l    - print information about the different taint bits (list)\n"
+				"-x value - print taint information using value instead\n\n"
+				"Hint: Taints are stored in %s\n"
+				"Sourcecode available at: https://github.com/roseswe/tainted\n",
+				argv[0], __DATE__, PROC_TAINTED);
 			return 0;
 		case 'x':
 		  /* identifier "optarg" is undefined */
