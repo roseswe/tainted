@@ -126,6 +126,6 @@ LivePatching sets currently the O & K taint flag. There is IMHO nothing you can 
     2024-08-01T13 38 52.679969+02 00 host kernel  [   11.031505] livepatch_11_150300_2_2  loading out-of-tree module taints kernel.
 
 <!--
-$Id: README.md,v 1.8 2025/01/23 19:55:42 ralph Exp $
+$Id: README.md,v 1.9 2025/01/24 10:39:39 ralph Exp $
 vim:set fileencoding=utf8 fileformat=unix filetype=text tabstop=2 expandtab:
  -->
