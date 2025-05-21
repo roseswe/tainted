@@ -1,4 +1,4 @@
-/* $Id: tainted.c,v 1.18 2025/01/23 19:42:57 ralph Exp $
+/* $Id: tainted.c,v 1.19 2025/03/18 10:16:55 ralph Exp $
  * vim:set fileencoding=utf8 fileformat=unix filetype=c tabstop=2 noexpandtab:
  *
  * Tainted: Tool to get the current taint value and print each set bit in
