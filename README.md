@@ -4,7 +4,7 @@ tainted is a command-line (CLI) tool to get the current Linux Kernel taint value
 
 (C) 2014 - Nikolay Aleksandrov <nikolay@redhat.com> (Version 1.0)
 
-(c) 2022-2025 by Ralph Roth (Version 2.x.x) - enhancements and fixes for SLES 12, 15, openSUSE, Debian/Ubuntu
+(c) 2022-2026 by Ralph Roth (Version 2.x.x) - enhancements and fixes for SLES 12, 15, 16, openSUSE, Debian/Ubuntu
 
 Homepage of version 2.x.x = <https://github.com/roseswe/tainted>
 
@@ -13,6 +13,9 @@ The Linux kernel maintains a "tainted state" that is included in kernel error me
 The current taint value is extracted by `tainted` from /proc/sys/kernel/tainted or can be passed on the command line with the option -x
 
 NOTE: SLES 12/SLES 15/openSUSE 15 sets the bit 30? (N) of the tainted value. The program has been adapted to scope with this special behavior (tainted version 2.0.6++). See also the SUSE Technical Information Document (TID) #000016321 (3582750) -- Tainted kernel - <https://www.suse.com/support/kb/doc/?id=000016321> and /usr/src/linux/Documentation/sysctl/kernel.txt | <https://docs.kernel.org/admin-guide/tainted-kernels.html> | <https://www.kernel.org/doc/Documentation/admin-guide/tainted-kernels.rst>
+
+Tainted kernels are not supported by SUSE Support unless the taint is due to a SUSE package or module. SAP does not allow any software to taint the Linux kernel.
+
 
 ## How to build
 
