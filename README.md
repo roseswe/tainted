@@ -1,12 +1,10 @@
 # tainted - About
 
-tainted is a command-line (CLI) tool to get the current Linux Kernel taint value and print each set bit in human readable format.
+>[!NOTE] Info
+> `tainted` is a command-line (CLI) tool to get the current Linux Kernel taint value and print each set bit in human readable format. Homepage of version 2.x.x = <https://github.com/roseswe/tainted>
 
 (C) 2014 - Nikolay Aleksandrov <nikolay@redhat.com> (Version 1.0)
-
 (c) 2022-2026 by Ralph Roth (Version 2.x.x) - enhancements and fixes for SLES 12, 15, 16, openSUSE, Debian/Ubuntu
-
-Homepage of version 2.x.x = <https://github.com/roseswe/tainted>
 
 The Linux kernel maintains a "tainted state" that is included in kernel error messages. The tainted state provides information about whether something has happened to the running kernel that affects whether a kernel error or hang can be effectively fixed by analyzing the kernel source code. Some of the information in the taint relates to whether the information provided by the kernel in the error message can be trusted.
 
@@ -118,6 +116,8 @@ A Makefile is provided for gcc
 
 ### Note for Kernel taints coming from DRBD (4096, O) under SLES
 
+>[!NOTE] Most common taint I have seen so far
+
     2024-09-18T12 38 41.392033+02 00 host kernel  [ 5053.593052][T328362] drbd  loading out-of-tree module taints kernel.
 
 Workaround:
@@ -129,6 +129,6 @@ LivePatching sets currently the O & K taint flag. There is IMHO nothing you can 
     2024-08-01T13 38 52.679969+02 00 host kernel  [   11.031505] livepatch_11_150300_2_2  loading out-of-tree module taints kernel.
 
 <!--
-$Id: README.md,v 1.9 2025/01/24 10:39:39 ralph Exp $
+$Id: README.md,v 1.11 2026/04/22 09:13:29 ralph Exp $
 vim:set fileencoding=utf8 fileformat=unix filetype=text tabstop=2 expandtab:
  -->
